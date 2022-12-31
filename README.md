@@ -36,7 +36,7 @@ For more information, please contact us at [arctic@man.com](arctic@man.com).
 ### Install Arctic
 
 ``
-pip install git+https://github.com/man-group/arctic.git
+pip install git+https://github.com/spyamine/arctic-amine.git
 ``
 
 ### Run a MongoDB
