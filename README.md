@@ -48,7 +48,7 @@ mongod --dbpath <path/to/db_directory>
 ## Using VersionStore
 ``
 from arctic import Arctic
-import quandl
+import yfinance
 ``
 ### Connect to Local MONGODB
 ``
@@ -67,12 +67,15 @@ library = store['NASDAQ']
 
 ### Load some data - maybe from Quandl
 ``
-aapl = quandl.get("WIKI/AAPL", authtoken="your token here")
+ticker = yf.Ticker("AAPL")
+
+aapl = ticker.history(period="max")
+
 ``
 
 ### Store the data in the library
 ``
-library.write('AAPL', aapl, metadata={'source': 'Quandl'})
+library.write('AAPL', aapl, metadata={'source': 'yfinance'})
 ``
 
 ### Reading the data
@@ -80,7 +83,18 @@ library.write('AAPL', aapl, metadata={'source': 'Quandl'})
 item = library.read('AAPL')
 aapl = item.data
 metadata = item.metadata
+
+print("data from the Database:\n{}".format(aapl.tail()))
+print ("metadata: {}".format(metadata))
+
 ``
+
+### Deleting the library you created
+``
+store.delete_library("NASDAQ")
+
+``
+
 
 VersionStore supports much more: [See the HowTo](howtos/how_to_use_arctic.py)!
 
